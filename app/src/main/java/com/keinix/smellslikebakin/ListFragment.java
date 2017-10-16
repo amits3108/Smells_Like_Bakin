@@ -11,14 +11,19 @@ import android.view.ViewGroup;
 
 public class ListFragment extends Fragment {
 
+    public interface OnRecipeSelectedInterface {
+        void onListRecipeSelected(int index);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        OnRecipeSelectedInterface listener = (OnRecipeSelectedInterface) getActivity();
         // auto added to container viewGroup. need 3rd arg false to stop double add
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.listRecyclerView);
-        ListAdapter listAdapter = new ListAdapter();
+        ListAdapter listAdapter = new ListAdapter(listener);
         recyclerView.setAdapter(listAdapter);
 
         // fragments always have access to their activity vio getActivity()
