@@ -1,14 +1,15 @@
 package com.keinix.smellslikebakin;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class ViewPagerFragment extends Fragment {
+public class ViewPagerFragment extends android.support.v4.app.Fragment {
     public static final String KEY_RECIPE_INDEX = "recipe_index";
 
 
@@ -19,6 +20,22 @@ public class ViewPagerFragment extends Fragment {
 
         int index = getArguments().getInt(KEY_RECIPE_INDEX);
         getActivity().setTitle(Recipes.names[index]);
+
+        final IngredientsFragment ingredientsFragment = new IngredientsFragment();
+        final DirectionsFragment directionsFragment = new DirectionsFragment();
+
+        ViewPager viewPager = view.findViewById(R.id.viewPager);
+        viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
+            @Override
+            public android.support.v4.app.Fragment getItem(int position) {
+                return position == 0 ? ingredientsFragment : directionsFragment;
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        });
         return view;
     }
 
