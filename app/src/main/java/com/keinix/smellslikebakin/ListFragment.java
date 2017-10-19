@@ -21,9 +21,9 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         OnRecipeSelectedInterface listener = (OnRecipeSelectedInterface) getActivity();
         // auto added to container viewGroup. need 3rd arg false to stop double add
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_recycler_view, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.listRecyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.RecyclerView);
         ListAdapter listAdapter = new ListAdapter(listener);
         recyclerView.setAdapter(listAdapter);
 
