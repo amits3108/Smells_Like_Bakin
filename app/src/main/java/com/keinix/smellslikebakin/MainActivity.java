@@ -1,6 +1,7 @@
 package com.keinix.smellslikebakin;
 
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +63,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onGridRecipeSelected(int index) {
+        DualPaneFragment dualPaneFragment = new DualPaneFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ViewPagerFragment.KEY_RECIPE_INDEX, index);
+        dualPaneFragment.setArguments(bundle);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.placeHolder, dualPaneFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }
